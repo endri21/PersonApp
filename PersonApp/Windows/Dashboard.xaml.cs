@@ -34,20 +34,17 @@ namespace PersonApp.Windows
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            Int32 nr = 20;
-            if (chbEmployed.IsChecked.HasValue == true)
-                nr = 10;
-         
+
             var result = await _ipersonRepository.AddPersonAsync(new PersonCore.Dto.PersonDto
             {
                 Name = txtName.Text,
                 LastName = txtLastName.Text,
-                Employed = 10,
+                Employed = chbEmployed.IsChecked.HasValue == true ? (byte?)10 : (byte?)20,
                 Gender = rbMale.IsChecked.HasValue ? "M" : "F",
                 CivilStatus = dpCivileStatus.SelectedItem.ToString(),
                 Birthday = dtBirthday.SelectedDate.Value,
                 PhoneNumber = txtPhoneNumber.Text
-            }) ;
+            });
             MessageBox.Show(result.ErrorMessage);
             ClearFields();
             LoadData();
@@ -64,7 +61,7 @@ namespace PersonApp.Windows
             txtName.Text = "";
             txtLastName.Text = "";
             txtPhoneNumber.Text = "";
-           
+
             dtBirthday.Text = "";
             chbEmployed.IsChecked = false;
             dpCivileStatus.SelectedItem = -1;
@@ -77,7 +74,7 @@ namespace PersonApp.Windows
             var data = await _ipersonRepository.GetPersonByTextAsync(txtSearch.Text);
             PersonDataGrid.ItemsSource = data;
         }
-        void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
             PersonDto dataselected = (PersonDto)row.Item;
@@ -92,7 +89,7 @@ namespace PersonApp.Windows
             // Some operations with this row
         }
 
-        async void Update_Click(object sender, RoutedEventArgs e)
+        private async void Update_Click(object sender, RoutedEventArgs e)
         {
 
             var update = await _ipersonRepository.UpdatePersonAsync(new PersonDto
@@ -108,17 +105,15 @@ namespace PersonApp.Windows
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(hiddenId.Text, out int id);
-            
+
             var deleted = await _ipersonRepository.DeletePersonAsync(id);
             if (deleted)
             {
                 MessageBox.Show("Personi u fshi me sukses");
-                
             }
             else
             {
                 MessageBox.Show("Ka ndodhur nje gabim .");
-
             }
             LoadData();
 

@@ -12,8 +12,6 @@ namespace PersonCore.Dto
         public byte? Employed { get; set; }
         public string Gender { get; set; }
         public string CivilStatus { get; set; }
-
-
     }
 
     public class PersonResponseDto

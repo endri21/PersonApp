@@ -10,10 +10,9 @@
     Height="600" Width="1024" ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen" WindowStyle="None">
 
-   
-    
+
+
     <Grid>
-        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
@@ -23,7 +22,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,672,0">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,692,0">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White" Offset="1"/>
@@ -127,7 +126,11 @@
             </StackPanel>
             <TextBlock HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" x:Name="txtUserLoginName" Text="" VerticalAlignment="Top"/>
         </Grid>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" Name="PersonDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="263" Margin="169,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="616">
+        <DataGrid 
+            
+            CanUserAddRows="False"
+                  CanUserDeleteRows="False"                 
+                  AutoGenerateColumns="False" ItemsSource="{Binding}" Name="PersonDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="397" Margin="169,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="616">
 
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
@@ -138,11 +141,11 @@
 
                 <DataGridTextColumn Header="ID" Visibility="Hidden" Width="40" Binding="{Binding Id}" CanUserResize="False" IsReadOnly="True" ></DataGridTextColumn>
 
-                <DataGridTextColumn Header="FirstName" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="LastName"  Binding="{Binding LastName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Datelindja"  Binding="{Binding Birthday}"></DataGridTextColumn>
-                <DataGridTextColumn Header="City" Binding="{Binding BirthPlace}"></DataGridTextColumn>
-                <DataGridTextColumn Header="I punesuar"  Binding="{Binding Employed}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="FirstName" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="LastName"  Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="Datelindja"  Binding="{Binding Birthday}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="City" Binding="{Binding BirthPlace}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="I punesuar"  Binding="{Binding Employed}"></DataGridTextColumn>
 
 
             </DataGrid.Columns>
@@ -151,7 +154,7 @@
 
         </DataGrid>
         <Button Content="Kerko" Grid.Column="1" HorizontalAlignment="Left" Margin="710,25,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Search_Click"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="169,34,0,0" Grid.Row="1" TextWrapping="Wrap"  Name="txtSearch" VerticalAlignment="Top" Width="518"/>
+        <TextBox materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="169,34,0,0" Grid.Row="1" TextWrapping="Wrap"  Name="txtSearch" VerticalAlignment="Top" Width="518"/>
         <ComboBox HorizontalAlignment="Left" Margin="10,254,0,0"
                   Grid.Row="1" VerticalAlignment="Top" Width="120"
                   Name="dpCivileStatus">
