@@ -1,0 +1,79 @@
+﻿<Window x:Class="PersonApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonApp"
+        mc:Ignorable="d"
+        Title="LogIn" Height="450" Width="800"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+      >
+
+    <Grid Margin="20" x:Name="LogInForm">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center" FontSize="64" 
+                   FontFamily="Segoe UI Light" Margin="0,0,0,20">
+            Login Form
+        </TextBlock>
+
+        <!-- Error Message Row -->
+        <TextBlock x:Name="ErrorMessage" Grid.Row="1" Grid.Column="1"
+                   Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                   Foreground="Red"
+          
+                   TextWrapping="Wrap" Margin="0,0,0,20"
+                   MaxWidth="300"></TextBlock>
+
+        <!-- Username row -->
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0,5,10">
+            Username:
+        </TextBlock>
+
+        <TextBox x:Name="Username" Grid.Row="2"
+                 Grid.Column="2" MinWidth="350" MaxWidth="350" Margin="0,0,0,10"></TextBox>
+
+        <!-- Password row -->
+        <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0,5,20">
+            Password:
+        </TextBlock>
+
+        <PasswordBox x:Name="Password" Grid.Row="3"
+                 Grid.Column="2" MinWidth="350" MaxWidth="350" Margin="0,0,0,20"></PasswordBox>
+
+        <!-- Login row -->
+        <Button Grid.Row="5" Grid.Column="2"
+                HorizontalAlignment="Center" x:Name="Login" Padding="20 5" Click="Login_Click" Margin="62,55,208,71">
+            Log In
+        </Button>
+        <Button Grid.Row="5" Grid.Column="2"
+                HorizontalAlignment="Center" x:Name="Sign" Padding="20 5" Click="Sign_Click"  RenderTransformOrigin="2.368,0.342" Margin="184,55,76,71">
+            Sign Up
+        </Button>
+
+    </Grid>
+
+
+
+</Window>

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PersonDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SE_Persons">
+          <Key>
+            <PropertyRef Name="IDSE_Person" />
+          </Key>
+          <Property Name="IDSE_Person" Type="decimal" Precision="19" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="BirthDay" Type="datetime" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
+          <Property Name="BirthPlace" Type="varchar" MaxLength="300" />
+          <Property Name="Employed" Type="tinyint" />
+          <Property Name="CivilStatus" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="decimal" Precision="19" Scale="0" />
+        </EntityType>
+        <EntityType Name="SE_UserPersonalInfo">
+          <Key>
+            <PropertyRef Name="IDUserPersonalInfo" />
+          </Key>
+          <Property Name="IDUserPersonalInfo" Type="decimal" Precision="19" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="300" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Registration_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SE_Users">
+          <Key>
+            <PropertyRef Name="IDSE_User" />
+          </Key>
+          <Property Name="IDSE_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDSE_UserPersonalInfo" Type="decimal" Precision="19" Scale="0" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Invalidated" Type="tinyint" />
+        </EntityType>
+        <Association Name="FK__SE_Users__IDUser__2180FB33">
+          <End Role="SE_UserPersonalInfo" Type="Self.SE_UserPersonalInfo" Multiplicity="0..1" />
+          <End Role="SE_Users" Type="Self.SE_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SE_UserPersonalInfo">
+              <PropertyRef Name="IDUserPersonalInfo" />
+            </Principal>
+            <Dependent Role="SE_Users">
+              <PropertyRef Name="IDSE_UserPersonalInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PersonDbModelStoreContainer">
+          <EntitySet Name="SE_Persons" EntityType="Self.SE_Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SE_UserPersonalInfo" EntityType="Self.SE_UserPersonalInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SE_Users" EntityType="Self.SE_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__SE_Users__IDUser__2180FB33" Association="Self.FK__SE_Users__IDUser__2180FB33">
+            <End Role="SE_UserPersonalInfo" EntitySet="SE_UserPersonalInfo" />
+            <End Role="SE_Users" EntitySet="SE_Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PersonDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SE_Persons">
+          <Key>
+            <PropertyRef Name="IDSE_Person" />
+          </Key>
+          <Property Name="IDSE_Person" Type="Decimal" Precision="19" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDay" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="BirthPlace" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Employed" Type="Byte" />
+          <Property Name="CivilStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="19" Scale="0" />
+        </EntityType>
+        <EntityType Name="SE_UserPersonalInfo">
+          <Key>
+            <PropertyRef Name="IDUserPersonalInfo" />
+          </Key>
+          <Property Name="IDUserPersonalInfo" Type="Decimal" Precision="19" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Registration_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SE_Users" Relationship="Self.FK__SE_Users__IDUser__2180FB33" FromRole="SE_UserPersonalInfo" ToRole="SE_Users" />
+        </EntityType>
+        <EntityType Name="SE_Users">
+          <Key>
+            <PropertyRef Name="IDSE_User" />
+          </Key>
+          <Property Name="IDSE_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDSE_UserPersonalInfo" Type="Decimal" Precision="19" Scale="0" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Invalidated" Type="Byte" />
+          <NavigationProperty Name="SE_UserPersonalInfo" Relationship="Self.FK__SE_Users__IDUser__2180FB33" FromRole="SE_Users" ToRole="SE_UserPersonalInfo" />
+        </EntityType>
+        <Association Name="FK__SE_Users__IDUser__2180FB33">
+          <End Role="SE_UserPersonalInfo" Type="Self.SE_UserPersonalInfo" Multiplicity="0..1" />
+          <End Role="SE_Users" Type="Self.SE_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SE_UserPersonalInfo">
+              <PropertyRef Name="IDUserPersonalInfo" />
+            </Principal>
+            <Dependent Role="SE_Users">
+              <PropertyRef Name="IDSE_UserPersonalInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PersonDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SE_Persons" EntityType="Self.SE_Persons" />
+          <EntitySet Name="SE_UserPersonalInfo" EntityType="Self.SE_UserPersonalInfo" />
+          <EntitySet Name="SE_Users" EntityType="Self.SE_Users" />
+          <AssociationSet Name="FK__SE_Users__IDUser__2180FB33" Association="Self.FK__SE_Users__IDUser__2180FB33">
+            <End Role="SE_UserPersonalInfo" EntitySet="SE_UserPersonalInfo" />
+            <End Role="SE_Users" EntitySet="SE_Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PersonDbModelStoreContainer" CdmEntityContainer="PersonDbEntities">
+          <EntitySetMapping Name="SE_Persons">
+            <EntityTypeMapping TypeName="PersonDbModel.SE_Persons">
+              <MappingFragment StoreEntitySet="SE_Persons">
+                <ScalarProperty Name="IDSE_Person" ColumnName="IDSE_Person" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
+                <ScalarProperty Name="Employed" ColumnName="Employed" />
+                <ScalarProperty Name="CivilStatus" ColumnName="CivilStatus" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SE_UserPersonalInfo">
+            <EntityTypeMapping TypeName="PersonDbModel.SE_UserPersonalInfo">
+              <MappingFragment StoreEntitySet="SE_UserPersonalInfo">
+                <ScalarProperty Name="IDUserPersonalInfo" ColumnName="IDUserPersonalInfo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SE_Users">
+            <EntityTypeMapping TypeName="PersonDbModel.SE_Users">
+              <MappingFragment StoreEntitySet="SE_Users">
+                <ScalarProperty Name="IDSE_User" ColumnName="IDSE_User" />
+                <ScalarProperty Name="IDSE_UserPersonalInfo" ColumnName="IDSE_UserPersonalInfo" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Invalidated" ColumnName="Invalidated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

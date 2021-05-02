@@ -1,0 +1,94 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonApp.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PersonApp.Windows.Dashboard"
+        mc:Ignorable="d"
+        Title="Dashboard" Height="450" Width="1023">
+    <Grid Width="400" Margin="18,21,597,-21">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="67*"/>
+            <RowDefinition Height="352*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="42*"/>
+            <ColumnDefinition Width="41*"/>
+            <ColumnDefinition Width="36*"/>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="261*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid AutoGenerateColumns="False" x:Name="PersonDataGrid" ItemsSource="{Binding}"  HorizontalAlignment="Left" Height="260" Margin="301,22,-578,0" VerticalAlignment="Top" Width="538" Grid.Column="8" Grid.Row="1">
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="ID" Visibility="Hidden" Width="40" Binding="{Binding Id}" CanUserResize="False" IsReadOnly="True" ></DataGridTextColumn>
+              
+                <DataGridTextColumn Header="FirstName" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="LastName"  Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Datelindja"  Binding="{Binding Birthday}"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Binding="{Binding BirthPlace}"></DataGridTextColumn>
+                <DataGridTextColumn Header="I punesuar"  Binding="{Binding Employed}"></DataGridTextColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <!--<Calendar x:Name="MaterialCalendar" 
+          IsTodayHighlighted="False"
+          Background="Black">
+            <Calendar.Resources>
+                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="Gray" />
+                <SolidColorBrush x:Key="MaterialDesignBody" Color="White" />
+            </Calendar.Resources>
+        </Calendar>-->
+
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="11,68,0,0" TextWrapping="Wrap" Text="Emri" Name="txtName" VerticalAlignment="Top" Width="120" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4"/>
+
+
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="33,74,0,0" TextWrapping="Wrap" Text="Mbiemti"  Name="txtLastName" VerticalAlignment="Top" Width="120" Grid.Row="1" Grid.Column="8"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="33,142,0,0" TextWrapping="Wrap" Text="Telefoni" Name="txtPhoneNumber" VerticalAlignment="Top" Width="120" Grid.Row="1" Grid.Column="8"/>
+        <Button Content="Ruaj" Name="BtnSave" HorizontalAlignment="Left" Margin="29,287,0,0" VerticalAlignment="Top" Width="75" Click="Save_Click" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3"/>
+        <Button Content="Fshi" HorizontalAlignment="Left" Margin="11,287,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="2"/>
+        <Button Content="Kerko" HorizontalAlignment="Left" Margin="101,287,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.587,2.688" Grid.Row="1" Grid.Column="8" Click="Search_Click"/>
+        <Label Content="Datelidja" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="55" Grid.Column="4" Grid.ColumnSpan="2"/>
+        <Label Content="Emri" HorizontalAlignment="Left" Margin="11,39,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="31" Grid.Column="4"/>
+        <Label Content="Mbiemri" HorizontalAlignment="Left" Margin="33,39,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="52" Grid.Column="8"/>
+        <Label Content="Telefoni" HorizontalAlignment="Left" Margin="36,113,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="49" Grid.Column="8"/>
+        <Label Content="Gjinia" HorizontalAlignment="Left" Margin="29,177,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="38" Grid.Column="4" Grid.ColumnSpan="2" RenderTransformOrigin="0.447,-1.125"/>
+        <Label Content="I punesuar" HorizontalAlignment="Left" Margin="34,170,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="64" Grid.Column="8"/>
+        <RadioButton Content="M" HorizontalAlignment="Left" Margin="29,206,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="18" Grid.Column="4" Grid.ColumnSpan="3"/>
+        <RadioButton Content="F" HorizontalAlignment="Left" Margin="0,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.648,0.833" Width="75" Grid.Row="1" Height="18" Grid.Column="6" Grid.ColumnSpan="3"/>
+        <RadioButton Content="Po" HorizontalAlignment="Left" Margin="34,199,0,0" VerticalAlignment="Top" Grid.Row="1" Height="18" Width="35" Grid.Column="8"/>
+        <RadioButton Content="Jo" HorizontalAlignment="Left" Margin="101,199,0,0" VerticalAlignment="Top" Grid.Row="1" Height="18" Width="33" Grid.Column="8"/>
+        <DatePicker HorizontalAlignment="Left" Margin="29,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="-14.45,-2.04" Name="txtBirthday" Width="112" Grid.Row="1" Height="25" Grid.Column="4" Grid.ColumnSpan="5"/>
+        <TextBox Grid.Column="4" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" TextWrapping="Wrap" Text="Kerko" VerticalAlignment="Top" Width="389" Grid.ColumnSpan="5" Name="txtSearch"/>
+        <ListBox x:Name="CivileStatus" Grid.Column="8" HorizontalAlignment="Left" Margin="33,231,0,86" Grid.Row="1" Width="100">
+
+            <ListBoxItem>
+                I martuar
+            </ListBoxItem>
+
+            <ListBoxItem>
+                I divorcuar
+            </ListBoxItem>
+
+        </ListBox>
+        <Label Content="Statusi Civil" HorizontalAlignment="Left" Margin="29,242,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="90" Grid.Column="4" Grid.ColumnSpan="3"/>
+        <Button Content="Modifiko" Name="BtnUpdate" Visibility="Hidden" HorizontalAlignment="Left" Margin="29,287,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Click="Update_Click"/>
+   
+    </Grid>
+</Window>
