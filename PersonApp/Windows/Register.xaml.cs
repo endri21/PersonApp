@@ -13,11 +13,12 @@ namespace PersonApp.Windows
     {
 
 
-        private readonly IUserRepository _userRepository = new UserRepository(new PersonDbEntities());
+        private readonly IUserRepository _userRepository;//= new UserRepository(new PersonDbEntities());
 
-        public Register()
+        public Register(IUserRepository user)
         {
             InitializeComponent();
+            this._userRepository = user;
         }
 
         private async void Sign_Click(object sender, RoutedEventArgs e)
@@ -33,6 +34,17 @@ namespace PersonApp.Windows
 
             MessageBox.Show(result.ErrorMessage);
 
+        }
+
+   
+
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            //MainWindow main = new MainWindow(
+            //    new LoginProviderRepository(_userRepository,new PersonDbEntities()));
+            MainWindow main = new MainWindow();
+            main.Show();
         }
     }
 }

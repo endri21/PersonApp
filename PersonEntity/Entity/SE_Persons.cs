@@ -25,5 +25,6 @@ namespace PersonEntity.Entity
         public string CivilStatus { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<decimal> CreatedBy { get; set; }
+        public byte Invalidated { get; set; }
     }
 }

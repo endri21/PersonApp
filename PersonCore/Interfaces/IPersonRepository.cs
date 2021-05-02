@@ -15,5 +15,6 @@ namespace PersonCore.Interfaces
         Task<List<PersonDto>> GetPersonByTextAsync( string search);
         Task<PersonUpdateDto> UpdatePersonAsync(PersonDto personDto);
         Task<SE_Persons> GetPersonById(int id);
+        Task<bool> DeletePersonAsync(int id);
     }
 }

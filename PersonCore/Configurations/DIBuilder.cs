@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PersonCore.Interfaces;
 using PersonCore.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PersonCore.Configurations
 {
@@ -13,8 +9,9 @@ namespace PersonCore.Configurations
     {
         public static void ConfigureSettingsServices(IServiceCollection services)
         {
-           
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddTransient<ILoginProviderRepository, LoginProviderRepository>();
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PersonDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PersonDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="SE_Persons">
           <Key>
             <PropertyRef Name="IDSE_Person" />
@@ -20,6 +20,7 @@
           <Property Name="CivilStatus" Type="varchar" MaxLength="100" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="CreatedBy" Type="decimal" Precision="19" Scale="0" />
+          <Property Name="Invalidated" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="SE_UserPersonalInfo">
           <Key>
@@ -62,8 +63,7 @@
             <End Role="SE_Users" EntitySet="SE_Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PersonDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -82,6 +82,7 @@
           <Property Name="CivilStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Decimal" Precision="19" Scale="0" />
+          <Property Name="Invalidated" Type="Byte" Nullable="false" />
         </EntityType>
         <EntityType Name="SE_UserPersonalInfo">
           <Key>
@@ -135,6 +136,7 @@
           <EntitySetMapping Name="SE_Persons">
             <EntityTypeMapping TypeName="PersonDbModel.SE_Persons">
               <MappingFragment StoreEntitySet="SE_Persons">
+                <ScalarProperty Name="Invalidated" ColumnName="Invalidated" />
                 <ScalarProperty Name="IDSE_Person" ColumnName="IDSE_Person" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

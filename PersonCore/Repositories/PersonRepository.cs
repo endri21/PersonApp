@@ -35,6 +35,7 @@ namespace PersonCore.Repositories
                         PhoneNumber = personDto.PhoneNumber,
                         Employed = personDto.Employed,
                         Gender = personDto.Gender,
+                        Invalidated = 20,
                         CreatedAt = DateTime.Now
 
                     };
@@ -60,10 +61,36 @@ namespace PersonCore.Repositories
             }
         }
 
+        public async Task<bool> DeletePersonAsync(int id)
+        {
+            using (var transaction = dbEntities.Database.BeginTransaction())
+            {
+                try
+                {
+                    var person = await GetPersonById(id);
+                    if (person == null)
+                    {
+                        return false;
+                    }
+                    person.Invalidated = 10;
+             
+                    await dbEntities.SaveChangesAsync();
+                    transaction.Commit();
+                    return true;
+
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+        }
 
         public async Task<List<PersonDto>> GetAllPersonsAsync()
         {
             return await dbEntities.SE_Persons
+                .Where(a=>a.Invalidated == 20)
                 .Select(s => new PersonDto
                 {
                     Id = (int)s.IDSE_Person,
@@ -79,12 +106,13 @@ namespace PersonCore.Repositories
 
         public async Task<SE_Persons> GetPersonById(int id)
         {
-            return await dbEntities.SE_Persons.FirstOrDefaultAsync(a => a.IDSE_Person == id);
+            return await dbEntities.SE_Persons.FirstOrDefaultAsync(a => a.IDSE_Person == id && a.Invalidated == 20);
         }
 
         public async Task<List<PersonDto>> GetPersonByTextAsync(string search)
         {
             return await dbEntities.SE_Persons
+                .Where(a=>a.Invalidated == 20)
                 .Where(a => (a.FirstName.ToLower().Contains(search.ToLower())
                 )
                 || (a.LastName.ToLower().Contains(search.ToLower())
@@ -122,6 +150,7 @@ namespace PersonCore.Repositories
                     person.Gender = Dto.Gender;
                     person.Employed = Dto.Employed;
                     person.PhoneNumber = Dto.PhoneNumber;
+                    person.Invalidated = 20;
                     person.CivilStatus = Dto.CivilStatus;
                     await dbEntities.SaveChangesAsync();
                     transaction.Commit();

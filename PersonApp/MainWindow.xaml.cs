@@ -13,15 +13,16 @@ namespace PersonApp
     public partial class MainWindow : Window
     {
 
-      
 
-        // private readonly LoginProviderRepository _loginProviderRepository = new LoginProviderRepository(_userRepository, new PersonDbEntities());
 
-       
-        private readonly ILoginProviderRepository _loginProviderRepository = new LoginProviderRepository(new UserRepository(new PersonDbEntities()), new PersonDbEntities());
+       // private readonly ILoginProviderRepository _loginProviderRepository;// = new LoginProviderRepository(_userRepository, new PersonDbEntities());
+
+
+         private readonly ILoginProviderRepository _loginProviderRepository = new LoginProviderRepository(new UserRepository(new PersonDbEntities()), new PersonDbEntities());
 
         //public MainWindow(ILoginProviderRepository userRepository)
         //{
+        //    //this.Show();
         //    InitializeComponent();
         //    this._loginProviderRepository = userRepository;
 
@@ -48,7 +49,8 @@ namespace PersonApp
                 //ridrejtimin ne faqen kryesore 
 
                 this.Hide();
-                Dashboard dashboard = new Dashboard();
+                Dashboard dashboard = new Dashboard(new  PersonRepository(new PersonDbEntities()));
+                
                 dashboard.Show();
             }
             else
@@ -65,7 +67,7 @@ namespace PersonApp
         {
             this.Hide();
             
-            Register register = new Register();
+            Register register = new Register(new UserRepository(new PersonDbEntities()));
 
             register.Show();
            

@@ -6,24 +6,128 @@
         xmlns:local="clr-namespace:PersonApp.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PersonApp.Windows.Dashboard"
         mc:Ignorable="d"
-        Title="Dashboard" Height="450" Width="1023">
-    <Grid Width="400" Margin="18,21,597,-21">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="67*"/>
-            <RowDefinition Height="352*"/>
-        </Grid.RowDefinitions>
+        Title="Dashboard" 
+    Height="600" Width="1024" ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen" WindowStyle="None">
+
+   
+    
+    <Grid>
+        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="42*"/>
-            <ColumnDefinition Width="41*"/>
-            <ColumnDefinition Width="36*"/>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="261*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid AutoGenerateColumns="False" x:Name="PersonDataGrid" ItemsSource="{Binding}"  HorizontalAlignment="Left" Height="260" Margin="301,22,-578,0" VerticalAlignment="Top" Width="538" Grid.Column="8" Grid.Row="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,672,0">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="1"/>
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="389"/>
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
+            </Grid.Effect>
+            <TextBlock x:Name="hiddenId"
+               Visibility="Hidden"
+               ></TextBlock>
+            <TextBox HorizontalAlignment="Left"
+                     Height="23" Margin="10,67,0,0"
+                     TextWrapping="Wrap" Name="txtName"
+                     VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left"
+                     Height="23" Margin="167,67,0,0"
+                     TextWrapping="Wrap"
+                     Name="txtLastName" VerticalAlignment="Top" 
+                     Width="120"/>
+
+            <TextBox HorizontalAlignment="Left" Height="23"
+                     Margin="167,127,0,0" TextWrapping="Wrap"
+                     Name="txtPhoneNumber" VerticalAlignment="Top" 
+                     Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23"
+                     Margin="10,187,0,0" TextWrapping="Wrap" 
+                     Name="txtBirthday" VerticalAlignment="Top" Width="120"/>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="10,46,0,0"
+                       TextWrapping="Wrap"
+                       Text="Emri" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="167,46,0,0"
+                       TextWrapping="Wrap"
+                       Text="Mbiemri" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="10,110,0,0"
+                       TextWrapping="Wrap"
+                       Text="Datelindja" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" 
+                       Margin="167,106,0,0" TextWrapping="Wrap" 
+                       Text="Numri i telefonit" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" 
+                       Margin="10,166,0,0"
+                       TextWrapping="Wrap" Text="Vendlindja"
+                       VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="167,166,0,0"
+                       TextWrapping="Wrap"
+                       Text="Gjinia" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="12,227,0,0"
+                       TextWrapping="Wrap" Text="Statusi civil"
+                       VerticalAlignment="Top"/>
+            <Button Content="Ruaj" Name="BtnSave"
+                    Background="#28a745"
+                    BorderBrush="#28a745"
+                    Click="Save_Click" HorizontalAlignment="Left"
+                    Margin="12,330,0,0" VerticalAlignment="Top" Width="118"/>
+            <Button Content="Modifiko"
+                      Background="#ffc107"
+                    BorderBrush="#ffc107"
+                    Visibility="Hidden" Click="Update_Click" 
+                    HorizontalAlignment="Left" Margin="12,330,0,0" 
+                    VerticalAlignment="Top" Width="118" Name="BtnUpdate"/>
+
+            <Button Content="Fshi" Click="Delete_Click"
+                    BorderBrush="#dc3545"
+                    Background="#dc3545"
+                    HorizontalAlignment="Left" Margin="167,330,0,0" 
+                    VerticalAlignment="Top" Width="120"/>
+            <RadioButton Content="M" Name="rbMale"
+                         HorizontalAlignment="Left" Margin="166,192,0,0"
+                         VerticalAlignment="Top"/>
+            <RadioButton Content="F" Name="rbFemale" HorizontalAlignment="Left" Margin="212,192,0,0" VerticalAlignment="Top"/>
+            <CheckBox Content="I punesuar" x:Name="chbEmployed" HorizontalAlignment="Left" Margin="167,258,0,0" VerticalAlignment="Top"/>
+            <DatePicker Name="dtBirthday" HorizontalAlignment="Left" Margin="13,125,0,0" VerticalAlignment="Top" Width="117"/>
+        </Grid>
+
+        <!--MouseDown="GridBarraTitulo_MouseDown"-->
+        <Grid x:Name="GridBarraTitulo" Grid.ColumnSpan="2" Background="#FF8522BD" > 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
+                    <materialDesign:PackIcon Kind="Bell"/>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
+                    <materialDesign:PackIcon Kind="Account"/>
+                </Button>
+
+                <!--Click="ButtonFechar_Click"-->
+
+
+                <Button x:Name="btnShotdown" Click="Shutdown_Click" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" >
+                    <materialDesign:PackIcon Kind="Power"/>
+                </Button>
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" x:Name="txtUserLoginName" Text="" VerticalAlignment="Top"/>
+        </Grid>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" Name="PersonDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="263" Margin="169,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="616">
 
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
@@ -33,7 +137,7 @@
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="ID" Visibility="Hidden" Width="40" Binding="{Binding Id}" CanUserResize="False" IsReadOnly="True" ></DataGridTextColumn>
-              
+
                 <DataGridTextColumn Header="FirstName" Binding="{Binding Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="LastName"  Binding="{Binding LastName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Datelindja"  Binding="{Binding Birthday}"></DataGridTextColumn>
@@ -42,53 +146,22 @@
 
 
             </DataGrid.Columns>
+
+
+
         </DataGrid>
+        <Button Content="Kerko" Grid.Column="1" HorizontalAlignment="Left" Margin="710,25,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Search_Click"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="169,34,0,0" Grid.Row="1" TextWrapping="Wrap"  Name="txtSearch" VerticalAlignment="Top" Width="518"/>
+        <ComboBox HorizontalAlignment="Left" Margin="10,254,0,0"
+                  Grid.Row="1" VerticalAlignment="Top" Width="120"
+                  Name="dpCivileStatus">
+            <ComboBoxItem Content="Zgjidh .." IsSelected="True" TabIndex="-1" ></ComboBoxItem>
 
-
-        <!--<Calendar x:Name="MaterialCalendar" 
-          IsTodayHighlighted="False"
-          Background="Black">
-            <Calendar.Resources>
-                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="Gray" />
-                <SolidColorBrush x:Key="MaterialDesignBody" Color="White" />
-            </Calendar.Resources>
-        </Calendar>-->
-
-
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="11,68,0,0" TextWrapping="Wrap" Text="Emri" Name="txtName" VerticalAlignment="Top" Width="120" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4"/>
-
-
-
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="33,74,0,0" TextWrapping="Wrap" Text="Mbiemti"  Name="txtLastName" VerticalAlignment="Top" Width="120" Grid.Row="1" Grid.Column="8"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="33,142,0,0" TextWrapping="Wrap" Text="Telefoni" Name="txtPhoneNumber" VerticalAlignment="Top" Width="120" Grid.Row="1" Grid.Column="8"/>
-        <Button Content="Ruaj" Name="BtnSave" HorizontalAlignment="Left" Margin="29,287,0,0" VerticalAlignment="Top" Width="75" Click="Save_Click" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3"/>
-        <Button Content="Fshi" HorizontalAlignment="Left" Margin="11,287,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="2"/>
-        <Button Content="Kerko" HorizontalAlignment="Left" Margin="101,287,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.587,2.688" Grid.Row="1" Grid.Column="8" Click="Search_Click"/>
-        <Label Content="Datelidja" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="55" Grid.Column="4" Grid.ColumnSpan="2"/>
-        <Label Content="Emri" HorizontalAlignment="Left" Margin="11,39,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="31" Grid.Column="4"/>
-        <Label Content="Mbiemri" HorizontalAlignment="Left" Margin="33,39,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="52" Grid.Column="8"/>
-        <Label Content="Telefoni" HorizontalAlignment="Left" Margin="36,113,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="49" Grid.Column="8"/>
-        <Label Content="Gjinia" HorizontalAlignment="Left" Margin="29,177,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="38" Grid.Column="4" Grid.ColumnSpan="2" RenderTransformOrigin="0.447,-1.125"/>
-        <Label Content="I punesuar" HorizontalAlignment="Left" Margin="34,170,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="64" Grid.Column="8"/>
-        <RadioButton Content="M" HorizontalAlignment="Left" Margin="29,206,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="18" Grid.Column="4" Grid.ColumnSpan="3"/>
-        <RadioButton Content="F" HorizontalAlignment="Left" Margin="0,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.648,0.833" Width="75" Grid.Row="1" Height="18" Grid.Column="6" Grid.ColumnSpan="3"/>
-        <RadioButton Content="Po" HorizontalAlignment="Left" Margin="34,199,0,0" VerticalAlignment="Top" Grid.Row="1" Height="18" Width="35" Grid.Column="8"/>
-        <RadioButton Content="Jo" HorizontalAlignment="Left" Margin="101,199,0,0" VerticalAlignment="Top" Grid.Row="1" Height="18" Width="33" Grid.Column="8"/>
-        <DatePicker HorizontalAlignment="Left" Margin="29,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="-14.45,-2.04" Name="txtBirthday" Width="112" Grid.Row="1" Height="25" Grid.Column="4" Grid.ColumnSpan="5"/>
-        <TextBox Grid.Column="4" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" TextWrapping="Wrap" Text="Kerko" VerticalAlignment="Top" Width="389" Grid.ColumnSpan="5" Name="txtSearch"/>
-        <ListBox x:Name="CivileStatus" Grid.Column="8" HorizontalAlignment="Left" Margin="33,231,0,86" Grid.Row="1" Width="100">
-
-            <ListBoxItem>
-                I martuar
-            </ListBoxItem>
-
-            <ListBoxItem>
-                I divorcuar
-            </ListBoxItem>
-
-        </ListBox>
-        <Label Content="Statusi Civil" HorizontalAlignment="Left" Margin="29,242,0,0" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="90" Grid.Column="4" Grid.ColumnSpan="3"/>
-        <Button Content="Modifiko" Name="BtnUpdate" Visibility="Hidden" HorizontalAlignment="Left" Margin="29,287,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Click="Update_Click"/>
-   
+            <ComboBoxItem Content="I martuar" > </ComboBoxItem>
+            <ComboBoxItem Content="Beqar"></ComboBoxItem>
+            <ComboBoxItem Content="I divorcuar"></ComboBoxItem>
+            
+            
+        </ComboBox>
     </Grid>
 </Window>

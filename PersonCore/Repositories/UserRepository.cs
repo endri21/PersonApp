@@ -133,7 +133,7 @@ namespace PersonCore.Repositories
                 return (await dbEntities.SE_Users.AnyAsync(a => a.Username.ToLower() == userName.ToLower()));
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return false;

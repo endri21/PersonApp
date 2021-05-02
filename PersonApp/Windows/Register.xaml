@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonApp.Windows"
         mc:Ignorable="d"
-        Title="Register" Height="450" Width="800"
+
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
@@ -14,7 +14,8 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        
+          Height="600" Width="1024" ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen" WindowStyle="None" 
         >
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
@@ -53,7 +54,7 @@
             Email:
         </TextBlock>
         <TextBox x:Name="Email" Grid.Row="2"
-            Grid.Column="2" MinWidth="350" MaxWidth="350" Margin="0,0,0,1"/>
+            Grid.Column="2" MinWidth="350"  MaxWidth="350" Margin="0,0,0,1"/>
         <TextBox x:Name="Name" Grid.Row="1"
                  Grid.Column="2" MinWidth="350" MaxWidth="350" Margin="0,0,0,11"/>
 
@@ -89,6 +90,9 @@
                 HorizontalAlignment="Center" x:Name="Sign" Padding="20 5" Click="Sign_Click" RenderTransformOrigin="2.368,0.342" Margin="104,125,156,10">
             Sign Up
         </Button>
-       
+        <Button Grid.Row="5" Grid.Column="2"
+            HorizontalAlignment="Center" x:Name="LogIn" Padding="20 5" Click="LogIn_Click" RenderTransformOrigin="2.368,0.342" Margin="0,131,260,15" Content="Log In"/>
+
+
     </Grid>
 </Window>
