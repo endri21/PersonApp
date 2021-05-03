@@ -54,7 +54,8 @@
                      Width="120"/>
             <TextBox HorizontalAlignment="Left" Height="23"
                      Margin="10,187,0,0" TextWrapping="Wrap" 
-                     Name="txtBirthday" VerticalAlignment="Top" Width="120"/>
+                    
+                     Name="txtBirthPlace" VerticalAlignment="Top" Width="120"/>
             <TextBlock HorizontalAlignment="Left"
                        Margin="10,46,0,0"
                        TextWrapping="Wrap"
@@ -86,40 +87,33 @@
                     Background="#28a745"
                     BorderBrush="#28a745"
                     Click="Save_Click" HorizontalAlignment="Left"
-                    Margin="12,330,0,0" VerticalAlignment="Top" Width="118"/>
+                    Margin="13,400,0,-42" VerticalAlignment="Top" Width="89"/>
             <Button Content="Modifiko"
                       Background="#ffc107"
+                    Visibility="Hidden"
                     BorderBrush="#ffc107"
-                    Visibility="Hidden" Click="Update_Click" 
-                    HorizontalAlignment="Left" Margin="12,330,0,0" 
-                    VerticalAlignment="Top" Width="118" Name="BtnUpdate"/>
+                     Click="Update_Click" 
+                    HorizontalAlignment="Left" Margin="13,400,0,-42" 
+                    VerticalAlignment="Top" Width="89" Name="BtnUpdate" RenderTransformOrigin="0.038,0.625"/>
 
             <Button Content="Fshi" Click="Delete_Click"
                     BorderBrush="#dc3545"
                     Background="#dc3545"
-                    HorizontalAlignment="Left" Margin="167,330,0,0" 
-                    VerticalAlignment="Top" Width="120"/>
+                    HorizontalAlignment="Left" Margin="120,400,0,-42" 
+                    VerticalAlignment="Top" Width="91"/>
             <RadioButton Content="M" Name="rbMale"
                          HorizontalAlignment="Left" Margin="166,192,0,0"
                          VerticalAlignment="Top"/>
             <RadioButton Content="F" Name="rbFemale" HorizontalAlignment="Left" Margin="212,192,0,0" VerticalAlignment="Top"/>
             <CheckBox Content="I punesuar" x:Name="chbEmployed" HorizontalAlignment="Left" Margin="167,258,0,0" VerticalAlignment="Top"/>
             <DatePicker Name="dtBirthday" HorizontalAlignment="Left" Margin="13,125,0,0" VerticalAlignment="Top" Width="117"/>
+            <Button Content="Pastro" HorizontalAlignment="Left" Margin="225,400,0,-42" VerticalAlignment="Top" Width="88" RenderTransformOrigin="0.16,0.75" Name="btnClean" Click="btnClean_Click"/>
+
         </Grid>
 
         <!--MouseDown="GridBarraTitulo_MouseDown"-->
-        <Grid x:Name="GridBarraTitulo" Grid.ColumnSpan="2" Background="#FF8522BD" > 
+        <Grid x:Name="GridBarraTitulo" Grid.ColumnSpan="2" Background="#FF8522BD" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0">
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
-                    <materialDesign:PackIcon Kind="Bell"/>
-                </Button>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
-                    <materialDesign:PackIcon Kind="Account"/>
-                </Button>
-
-                <!--Click="ButtonFechar_Click"-->
-
-
                 <Button x:Name="btnShotdown" Click="Shutdown_Click" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" >
                     <materialDesign:PackIcon Kind="Power"/>
                 </Button>
@@ -130,7 +124,11 @@
             
             CanUserAddRows="False"
                   CanUserDeleteRows="False"                 
-                  AutoGenerateColumns="False" ItemsSource="{Binding}" Name="PersonDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="397" Margin="169,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="616">
+                  AutoGenerateColumns="False" ItemsSource="{Binding}" Name="PersonDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="397" Margin="169,90,0,0" Grid.Row="1"
+            
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"
+            VerticalAlignment="Top" Width="616">
 
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
@@ -140,12 +138,13 @@
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="ID" Visibility="Hidden" Width="40" Binding="{Binding Id}" CanUserResize="False" IsReadOnly="True" ></DataGridTextColumn>
-
-                <DataGridTextColumn Width="*" Header="FirstName" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn  Width="*" Header="LastName"  Binding="{Binding LastName}"></DataGridTextColumn>
-                <DataGridTextColumn  Width="*" Header="Datelindja"  Binding="{Binding Birthday}"></DataGridTextColumn>
-                <DataGridTextColumn  Width="*" Header="City" Binding="{Binding BirthPlace}"></DataGridTextColumn>
-                <DataGridTextColumn  Width="*" Header="I punesuar"  Binding="{Binding Employed}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="Emri" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="Mbiemri" IsReadOnly="True"  Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="Datelindja" IsReadOnly="True" Binding="{Binding Birthday, StringFormat=d}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="Vendlindja" IsReadOnly="True" Binding="{Binding BirthPlace}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="Nr i telefonit" IsReadOnly="True"  Binding="{Binding PhoneNumber}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="Gjinia" IsReadOnly="True" Binding="{Binding Gender}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="*" Header="Statusi Civil" IsReadOnly="True" Binding="{Binding CivilStatus}"></DataGridTextColumn>
 
 
             </DataGrid.Columns>
@@ -160,11 +159,11 @@
                   Name="dpCivileStatus">
             <ComboBoxItem Content="Zgjidh .." IsSelected="True" TabIndex="-1" ></ComboBoxItem>
 
-            <ComboBoxItem Content="I martuar" > </ComboBoxItem>
-            <ComboBoxItem Content="Beqar"></ComboBoxItem>
-            <ComboBoxItem Content="I divorcuar"></ComboBoxItem>
-            
-            
+            <ComboBoxItem TabIndex="1" Content="I martuar" ></ComboBoxItem>
+            <ComboBoxItem TabIndex="2" Content="Beqar"></ComboBoxItem>
+            <ComboBoxItem TabIndex="3" Content="I divorcuar"></ComboBoxItem>
+
+
         </ComboBox>
     </Grid>
 </Window>

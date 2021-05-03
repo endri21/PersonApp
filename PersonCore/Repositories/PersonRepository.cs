@@ -93,12 +93,15 @@ namespace PersonCore.Repositories
                 .Where(a=>a.Invalidated == 20)
                 .Select(s => new PersonDto
                 {
-                    Id = (int)s.IDSE_Person,
                     Name = s.FirstName,
                     LastName = s.LastName,
-                    CivilStatus = s.CivilStatus,
+                    Employed = s.Employed,
+                    Birthday = s.BirthDay,
                     BirthPlace = s.BirthPlace,
-                    Employed = s.Employed
+                    CivilStatus = s.CivilStatus,
+                    PhoneNumber = s.PhoneNumber,
+                    Gender = s.Gender,
+                    Id = (int)s.IDSE_Person
                 })
                 .ToListAsync();
 
@@ -109,7 +112,7 @@ namespace PersonCore.Repositories
             return await dbEntities.SE_Persons.FirstOrDefaultAsync(a => a.IDSE_Person == id && a.Invalidated == 20);
         }
 
-        public async Task<List<PersonDto>> GetPersonByTextAsync(string search)
+        public async Task<List<PersonDto>> SearchPersonByTextAsync(string search)
         {
             return await dbEntities.SE_Persons
                 .Where(a=>a.Invalidated == 20)
@@ -122,7 +125,14 @@ namespace PersonCore.Repositories
                {
                    Name = s.FirstName,
                    LastName = s.LastName,
-                   Employed = s.Employed
+                   Employed = s.Employed,
+                   Birthday = s.BirthDay,
+                   BirthPlace = s.BirthPlace,
+                   CivilStatus = s.CivilStatus,
+                   PhoneNumber = s.PhoneNumber,
+                   Gender = s.Gender,
+                   Id = (int)s.IDSE_Person
+
                })
                .ToListAsync();
         }

@@ -24,7 +24,7 @@ namespace PersonCore.Interfaces
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
-        Task<List<PersonDto>> GetPersonByTextAsync( string search);
+        Task<List<PersonDto>> SearchPersonByTextAsync( string search);
         /// <summary>
         /// Ben modifikimin e te dhenave te nje personi 
         /// </summary>
